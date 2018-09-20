@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Raman Shastapalau">
+    <title>ReactJS homework 1.1 by Raman Shastapalau</title>
+    <!--Пишем функцию loop, которая будет принимать параметры: times (значение по умолчанию = 0),
+    callback (значение по умолчанию = null) и будет в цикле (times раз), вызывать функцию callback.
+    Если функцию не передана, то цикл не должен отрабатывать ни разу. -->
+        <script type="text/javascript">
+            'use strict';
+            let loop = (times = 0, callback = null) => {
+                if (callback) {
+                    for (let i = 1; i <= times; i++) {
+                        callback(i);
+                    }
+                }
+            };
+            loop(5); // Не выведет ничего, так как не объявлена callback
+            loop(7, (i) => console.log('Заголовок', i)); // Если устанавливаем times=7, то 7 раз выведем "Заголовок" в консоль
+        </script>
+</head>
+
+<body>
+<p>Результаты смотрим в консоли:<br> Ctrl + Shift + I > Console</p>
+</body>
+
+</html>
