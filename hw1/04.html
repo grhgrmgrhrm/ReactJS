@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Raman Shastapalau">
+    <title>ReactJS homework 1.4 by Raman Shastapalau</title>
+    <!--При помощи генератора написать функцию - анкету, которая запрашивает у пользователя
+    на ввод параметры и передаёт их в генератор. В конце, когда генератор завершается,
+    он должен вернуть все введённые входные параметры в виде объекта.
+    Этот объект нужно вывести в консоли.-->
+        <script type="text/javascript">
+            'use strict';
+            function* generateSequence() {
+                yield prompt('Как Вас зовут? ', 'Руслан');
+                yield prompt('Сколько вам лет? ', '42');
+                return prompt('Ваш рост в сантимертах?', '199');
+            }
+            let user = {};
+            let	generator = generateSequence();
+
+            user.name = generator.next().value;
+            user.age = generator.next().value;
+            user.height = generator.next().value;
+            console.log(user);
+        </script>
+</head>
+
+<body>
+<p>Результаты смотрим в консоли:<br> Ctrl + Shift + I > Console</p>
+</body>
+
+</html>
