@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Raman Shastapalau">
+    <title>ReactJS homework 1.2 by Raman Shastapalau</title>
+    <!--Написать функцию calculateArea, которая будет принимать параметры, для вычисления площади
+    можете выбрать какую то конкретную фигуру, а можете, основываясь на переданных параметрах,
+    выполнять требуемый алгоритм вычисления площади для переданной в параметрах фигуры) и возвращать
+    объект вида: { area, figure, input }, где area - вычисленная площадь, figure - название фигуры,
+    для которой вычислялась площадь, input - входные параметры, по которым было произведено вычисление.-->
+        <script type="text/javascript">
+            'use strict';
+            // Ниже пишем функцию calculateArea для определения типа фигуры и вычисления площади
+            let calculateArea = (...p) => {
+                let object = {
+                        area: 0,
+                        figure: '',
+                        input: []
+                    },
+                    sides = p.length, // количество сторон
+                    area = 0; // площадь
+                for (let item in p) {
+                    if (p[item] <= 0) {
+                        return console.log('Повторите ввод. Одна из сторон имеет либо отрицательное значение, либо равна нулю');
+                    }
+                }
+                switch (sides) {
+                    case 2:
+                        object.figure = (p[0] == p[1]) ? 'Полученная фигура: квадрат' : object.figure = 'Полученная фигура: прямоугольник';
+                        area = p[0] * p[1];
+                        break;
+                    case 3:
+                        object.figure = 'Полученная фигура: треугольник';
+                        let a = p[0],
+                            b = p[1],
+                            c = p[2],
+                            pr = (a + b + c) / 2; // Полупериметр треугольника. Нужно для вычисления площади теугольника, метод вычисления площади - по сторонам.
+                        area = Math.sqrt(pr * (pr - a) * (pr - b) * (pr - c)); // Вычисляем площадь треугольника по трём сторонам (формула Герона)
+                        break;
+                    default:
+                        return console.log('Сложная фигура. Уточните входные данные ');
+                }
+                object.area = area;
+                object.input = p;
+                return console.log(object);
+            }
+
+            // <Проверка работы функции>
+            calculateArea(2, 2); // Квадрат
+            calculateArea(3, 4); // Прямоугольник
+            calculateArea(3, 4, 5); // Треугольник
+            calculateArea(1, 2, 3, 4, 5); // Сложная фигура. Уточните входные данные
+            calculateArea(1, 2, -3, 4, 5); // Ошибка. Одна из сторон имеет либо отрицательное значение, либо равна нулю
+            calculateArea(1, 2, 3, 4, 0); // Ошибка. Одна из сторон имеет либо отрицательное значение, либо равна нулю
+            // </Проверка функции>
+        </script>
+</head>
+
+<body>
+<p>Результаты смотрим в консоли:<br> Ctrl + Shift + I > Console</p>
+</body>
+
+</html>
