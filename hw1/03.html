@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Raman Shastapalau">
+    <title>ReactJS homework 1.3 by Raman Shastapalau</title>
+    <!--3. Необходимо написать иерархию классов вида:
+    Human -> Employee -> Developer
+    Human -> Employee -> Manager
+    Каждый Менеджер (Manager) должен иметь внутренний массив своих сотрудников (разработчиков), а также методы по удалению/добавлению разработчиков.
+    Каждый Разработчик (Developer) должны иметь ссылку на Менеджера и методы для изменения менеджера (имеется ввиду возможность назначить другого менеджера).
+    У класса Human должны быть следующие параметры: name (строка), age (число), dateOfBirth (строка или дата)
+    У класса Employee должны присутствовать параметры: salary (число), department (строка)
+    В классе Human должен присутствовать метод displayInfo, который возвращает строку со всеми параметрами экземпляра Human.
+    В классе Employee должен быть реализовать такой же метод (displayInfo), который вызывает базовый метод и дополняет его параметрами из экземпляра Employee
+    Чтобы вызвать метод базового класса, необходимо внутри вызова метода displayInfo класса Employee написать: super.displayInfo(), это вызовет метод disaplyInfo класс Human и вернет строку с параметрами Human'a.-->
+
+    <script type="text/javascript">
+        'use strict';
+        class Human {
+            constructor(name, age, dateOfBirth) {
+                this.name = name;
+                this.age = age;
+                this.dateOfBirth = dateOfBirth;
+            }
+            displayInfo() {
+                console.log(this);
+            }
+        }
+        class Employee extends Human {
+            constructor(name, age, dateOfBirth, salary, department) {
+                super(name, age, dateOfBirth);
+                this.salary = salary;
+                this.department = department;
+            }
+            displayInfo() {
+                super.displayInfo();
+            }
+        }
+        class Developer extends Employee {
+            constructor(name, age, dateOfBirth, salary, department, manager) {
+                super(name, age, dateOfBirth, salary, department);
+                this.manager = manager;
+            }
+            setManager(manager) {
+                this.manager = manager;
+            }
+            displayInfo() {
+                super.displayInfo();
+            }
+        }
+        class Manager extends Employee {
+            constructor(name, age, dateOfBirth, salary, department, developers) {
+                super(name, age, dateOfBirth, salary, department);
+                this.developers = [];
+            }
+            addDevelopers(developer) {
+                this.developers.push(developer);
+            }
+            delDevelopers(developer) {
+                for (let item in this.developers) {
+                    if (this.developers[item] == developer) {
+                        this.developers.splice(item, 1);
+                    }
+                }
+            }
+            displayInfo() {
+                super.displayInfo();
+            }
+        }
+        // Разработчики
+        let developer1 = new Developer('Руслан Боширов', 38, '29/02/1980', 50000, 'Frontend');
+        let developer2 = new Developer('Александр Петров', 39, '13/09/1979', 60000, 'Backend');
+        let developer3 = new Developer('Сергей Скрипаль', 29, '23/06/1951', 70000, 'Frontend');
+        // Менеджеры
+        let manager1 = new Manager('Сергей Нарышкин', 30, '25/10/1954', 80000, 'HR');
+        // Наполнение и проверка данных
+        manager1.addDevelopers(developer1);
+        manager1.addDevelopers(developer2);
+        manager1.addDevelopers(developer3);
+        manager1.delDevelopers(developer2);
+        developer1.setManager(manager1);
+        developer2.setManager(manager1);
+        developer3.setManager(manager1);
+        // вывод информации о developer и manager
+        developer1.displayInfo();
+        developer2.displayInfo();
+        developer3.displayInfo();
+        manager1.displayInfo();
+
+    </script>
+</head>
+
+<body>
+<p>Результаты смотрим в консоли:<br> Ctrl + Shift + I > Console</p>
+</body>
+
+</html>
